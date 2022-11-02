@@ -1,9 +1,11 @@
 import styled from "@emotion/styled";
-import { FC } from "react";
+import { FC, useState } from "react";
 import Flex from "../Flex";
 
 interface RangeProps {
   values: string[];
+  onChange: (value: string) => void;
+  defaultValue: string;
 }
 
 const StyledRange = styled.input`
@@ -35,15 +37,32 @@ const StyledOption = styled.option`
   font-weight: 700;
 `;
 
-const Range: FC<RangeProps> = ({ values }) => {
+const Range: FC<RangeProps> = ({ values, onChange, defaultValue }) => {
+  const [rangeIndex, setRangeIndex] = useState<number>(
+    values.indexOf(defaultValue)
+  );
+
+  const changeHandler = (index: number) => {
+    setRangeIndex(index);
+    const value = values[index];
+    onChange(value);
+  };
+
   return (
     <Flex direction="column" align="center">
       <StyledDataList id="range_list">
         {values.map((value, index) => (
-          <StyledOption value={index + 1} label={value} key={index} />
+          <StyledOption label={value} key={index} />
         ))}
       </StyledDataList>
-      <StyledRange type="range" list="range_list" min={1} max={values.length} />
+      <StyledRange
+        type="range"
+        list="range_list"
+        min={0}
+        max={values.length - 1}
+        value={rangeIndex}
+        onChange={(e) => changeHandler(Number(e.target.value))}
+      />
     </Flex>
   );
 };

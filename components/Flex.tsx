@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
-import { FC, ReactNode } from "react";
+import { FC, HTMLAttributes, ReactNode } from "react";
 import spacer, { SpacerProps } from "../utils/spacer";
 
-interface FlexProps extends SpacerProps {
+interface FlexProps extends SpacerProps, HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
   direction?: string;
   align?: string;
@@ -10,6 +10,7 @@ interface FlexProps extends SpacerProps {
   gap?: string;
   width?: string;
   height?: string;
+  position?: string;
 }
 
 const StyledFlex = styled.div<FlexProps>`
@@ -20,6 +21,7 @@ const StyledFlex = styled.div<FlexProps>`
   gap: ${(props) => props.gap};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
+  position: ${(props) => props.position};
   ${spacer};
 `;
 

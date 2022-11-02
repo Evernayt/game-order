@@ -6,11 +6,18 @@ import Range from "../components/UI/Range";
 import Button, { ButtonVariants } from "../components/UI/Button";
 import ButtonGroup from "../components/UI/ButtonGroup";
 import Router from "next/router";
-import { SortVariants } from "../constants/game";
+import { ITEM_COUNTS, SORTING_VALUES, SortVariants } from "../constants/game";
 import { useGameContext } from "../context/gameContext";
 
 const Home = () => {
-  const { sorting, setSorting } = useGameContext();
+  const {
+    sorting,
+    setSorting,
+    itemsCount,
+    setItemsCount,
+    sortingValue,
+    setSortingValue,
+  } = useGameContext();
 
   const sortingChange = (value: string) => {
     setSorting(value);
@@ -25,9 +32,17 @@ const Home = () => {
       <Flex align="center" justify="center" height="100%">
         <Card borderColor="blue">
           <Title text="Кол-во предметов" mb="16px" />
-          <Range values={["2", "3", "4", "5"]} />
-          <Title text="Кол-во предметов" mt="54px" mb="16px" />
-          <Range values={["А", "9", "19", "50", "99", "999"]} />
+          <Range
+            values={ITEM_COUNTS}
+            onChange={(value) => setItemsCount(Number(value))}
+            defaultValue={itemsCount.toString()}
+          />
+          <Title text="Значения" mt="54px" mb="16px" />
+          <Range
+            values={SORTING_VALUES}
+            onChange={(value) => setSortingValue(value)}
+            defaultValue={sortingValue}
+          />
           <ButtonGroup
             margin="75px 0 100px 0"
             buttons={[

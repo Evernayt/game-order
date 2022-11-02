@@ -9,6 +9,10 @@ export type SpacerProps = {
   pr?: string;
   pb?: string;
   pl?: string;
+  top?: string;
+  right?: string;
+  bottom?: string;
+  left?: string;
 };
 
 const spacer = (props: SpacerProps) => ({
@@ -22,6 +26,10 @@ const spacer = (props: SpacerProps) => ({
   paddingRight: props.pr,
   paddingBottom: props.pb,
   paddingLeft: props.pl,
+  top: props.top,
+  right: props.right,
+  bottom: props.bottom,
+  left: props.left,
 });
 
 export default spacer;
