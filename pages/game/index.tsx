@@ -1,60 +1,45 @@
 import Flex from "../../components/Flex";
 import MainContainer from "../../components/MainContainer";
-import DESIGNS from "../../constants/designs";
-import { useGameContext } from "../../context/gameContext";
 import GameItems from "./GameItems";
 import ItemsPlace from "./ItemsPlace";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import GameContainer from "../../components/GameContainer";
+import { useGameContext } from "../../context/gameContext";
 import { useEffect } from "react";
-import getRandomLetters from "../../utils/getRandomLetters";
-import getRandomNumbers from "../../utils/getRandomNumbers";
-import { NUMBERS } from "../../constants/game";
+import SortArrow from "./SortArrow";
+import VictoryModal from "./VictoryModal";
 
 const Game = () => {
-  const {
-    itemsCount,
-    sortingValue,
-    setRandomValues,
-    setCorrectValues,
-    design,
-    setDesign,
-  } = useGameContext();
+  const { design, gameItems } = useGameContext();
 
   useEffect(() => {
-    generateValues();
-    generateDesign();
-  }, []);
+    checkCompleted();
+  }, [gameItems]);
 
-  const generateValues = () => {
-    let values: string[] = [];
-
-    if (sortingValue === "А") {
-      values = getRandomLetters(itemsCount);
-    } else {
-      const max = Number(sortingValue);
-      const number = NUMBERS.find((x) => x.max === max);
-      const min = number ? number.min : 1;
-      values = getRandomNumbers(min, max, itemsCount).map(String);
+  const checkCompleted = () => {
+    if (gameItems.length === 0) {
+      console.log("FIN");
     }
-
-    setRandomValues(values);
-    setCorrectValues([...values].sort());
-  };
-
-  const generateDesign = () => {
-    const index = getRandomNumbers(0, DESIGNS.length - 1, 1)[0];
-    setDesign(DESIGNS[index]);
   };
 
   return (
     <MainContainer>
-      <DndProvider backend={HTML5Backend}>
-        <Flex direction="column" align="center" justify="center" height="100%">
-          <GameItems />
-          <ItemsPlace placeImage={design.place} />
-        </Flex>
-      </DndProvider>
+      <VictoryModal isShowing={true} hide={() => {}}/>
+      <GameContainer bgImage={design.bg}>
+        <DndProvider backend={HTML5Backend}>
+          <Flex
+            direction="column"
+            align="center"
+            justify="space-between"
+            height="100%"
+          >
+            <GameItems />
+            <SortArrow />
+            <ItemsPlace />
+          </Flex>
+        </DndProvider>
+      </GameContainer>
     </MainContainer>
   );
 };

@@ -18,6 +18,8 @@ import flower3 from "../images/items/flower-3.png";
 import flower4 from "../images/items/flower-4.png";
 import flower5 from "../images/items/flower-5.png";
 
+import circle from "../images/circle.png";
+
 import place1 from "../images/places/place-1.png";
 import place2 from "../images/places/place-2.png";
 import place3 from "../images/places/place-3.png";
@@ -34,21 +36,25 @@ const DESIGNS: IDesign[] = [
   {
     items: [cookie1, cookie2, cookie3, cookie4],
     place: place1,
+    circle,
     bg: bg1,
   },
   {
     items: [coin1, coin2, coin3],
     place: place2,
+    circle,
     bg: bg2,
   },
   {
     items: [toy1, toy2, toy3, toy4],
     place: place3,
+    circle,
     bg: bg3,
   },
   {
     items: [flower1, flower2, flower3, flower4, flower5],
     place: place4,
+    circle,
     bg: bg4,
   },
 ];

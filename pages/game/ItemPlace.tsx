@@ -4,50 +4,69 @@ import { FC } from "react";
 import Flex from "../../components/Flex";
 import OutlinedText from "../../components/UI/OutlinedText";
 import { useDrop } from "react-dnd";
+import { ISettedGameItem } from "../../models/ISettedGameItem";
 
 interface ItemPlaceProps {
-  correctValue: string;
-  itemImage?: StaticImageData;
+  circle: StaticImageData;
+  settedGameItem: ISettedGameItem;
 }
 
-const StyledItemPlace = styled.div`
+type StyledItemPlaceProps = {
+  isOver: boolean;
+};
+
+type StyledCircleProps = {
+  circle: string;
+};
+
+const StyledItemPlace = styled.div<StyledItemPlaceProps>`
   width: 131px;
   height: 131px;
   border-radius: 50%;
-  &:hover {
-    background-color: gainsboro;
-  }
+  background-color: ${(props) => (props.isOver ? "#104987" : "transparent")};
+  opacity: ${(props) => (props.isOver ? 0.5 : 1)};
+`;
+
+const StyledCircle = styled.div<StyledCircleProps>`
+  width: 100%;
+  height: 100%;
+  background-image: url(${(props) => props.circle});
 `;
 
 const StyledImage = styled(Image)`
   width: 100%;
   height: 100%;
+  pointer-events: none;
+  user-select: none;
 `;
 
-const ItemPlace: FC<ItemPlaceProps> = ({ correctValue, itemImage }) => {
-  const [{ canDrop, isOver }, drop] = useDrop(
+const ItemPlace: FC<ItemPlaceProps> = ({ circle, settedGameItem }) => {
+  const [{ isOver }, drop] = useDrop(
     () => ({
       accept: "GameItem",
       collect: (monitor) => ({
         isOver: monitor.isOver(),
-        canDrop: monitor.canDrop(),
       }),
-      drop: () => ({ name: correctValue }),
+      drop: () => ({ name: settedGameItem.correctValue }),
     }),
-    [correctValue]
+    [settedGameItem.correctValue]
   );
 
   return (
-    <div ref={drop} style={{ backgroundColor: isOver ? "red" : "white" }}>
-      <StyledItemPlace onClick={() => console.log("da")}>
-        {itemImage && (
+    <StyledItemPlace ref={drop} isOver={isOver}>
+      <StyledCircle circle={circle.src}>
+        {settedGameItem.image && (
           <Flex align="center" justify="center">
-            {<OutlinedText text="da" />}
-            {<StyledImage src={itemImage} alt="" />}
+            <OutlinedText
+              text={settedGameItem.correctValue}
+              size="56px"
+              strokeWidth={5}
+            />
+            <StyledImage src={settedGameItem.image} alt="" />
           </Flex>
         )}
-      </StyledItemPlace>
-    </div>
+      </StyledCircle>
+    </StyledItemPlace>
   );
 };
 

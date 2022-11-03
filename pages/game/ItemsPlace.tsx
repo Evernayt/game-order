@@ -1,37 +1,35 @@
-import Image, { StaticImageData } from "next/image";
-import { FC, useMemo } from "react";
+import styled from "@emotion/styled";
+import Image from "next/image";
 import Flex from "../../components/Flex";
 import { useGameContext } from "../../context/gameContext";
 import ItemPlace from "./ItemPlace";
 
-interface ItemsPlaceProps {
-  placeImage: StaticImageData;
-}
+const StyledPlaceImage = styled(Image)`
+  pointer-events: none;
+  user-select: none;
+`;
 
-const ItemsPlace: FC<ItemsPlaceProps> = ({ placeImage }) => {
-  const { correctValues } = useGameContext();
-
-  const ItemPlaces = useMemo(() => {
-    const itemPlaces = [];
-    for (let i = 0; i < 6; i++) {
-      itemPlaces.push(<ItemPlace correctValue={correctValues[i]} key={i} />);
-    }
-    return itemPlaces;
-  }, [correctValues]);
+const ItemsPlace = () => {
+  const { design, settedGameItems } = useGameContext();
 
   return (
     <Flex
       position="relative"
       align="center"
       justify="center"
-      width="990px"
-      height="323px"
+      direction="column"
+      width="100%"
     >
-      <Flex position="absolute" gap="4px" ml="82px" mb="8px" left="0">
-        {ItemPlaces}
+      <Flex position="absolute" justify="center" gap="4px" width="100%">
+        {settedGameItems.map((settedGameItem) => (
+          <ItemPlace
+            circle={design.circle}
+            settedGameItem={settedGameItem}
+            key={settedGameItem.correctValue}
+          />
+        ))}
       </Flex>
-
-      <Image src={placeImage} alt="" />
+      <StyledPlaceImage src={design.place} alt="" />
     </Flex>
   );
 };
