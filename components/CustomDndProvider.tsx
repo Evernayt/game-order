@@ -16,9 +16,9 @@ const CustomDndProvider: FC<CustomDndProviderProps> = ({ children }) => {
   }, []);
 
   return isTouch ? (
-    <DndProvider backend={TouchBackend}>{children}</DndProvider>
+    <DndProvider key="HTML5" backend={TouchBackend}>{children}</DndProvider>
   ) : (
-    <DndProvider backend={HTML5Backend}>{children}</DndProvider>
+    <DndProvider key="TOUCH" backend={HTML5Backend}>{children}</DndProvider>
   );
 };
 
