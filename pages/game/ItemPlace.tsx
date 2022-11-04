@@ -5,6 +5,10 @@ import Flex from "../../components/Flex";
 import OutlinedText from "../../components/UI/OutlinedText";
 import { useDrop } from "react-dnd";
 import { ISettedGameItem } from "../../models/ISettedGameItem";
+import { keyframes } from "@emotion/react";
+import { bounceIn } from "react-animations";
+
+const bounceInAnimation = keyframes`${bounceIn}`;
 
 interface ItemPlaceProps {
   circle: StaticImageData;
@@ -33,6 +37,10 @@ const StyledCircle = styled.div<StyledCircleProps>`
   background-image: url(${(props) => props.circle});
 `;
 
+const StyledFlex = styled(Flex)`
+  animation: 1s ${bounceInAnimation};
+`;
+
 const StyledImage = styled(Image)`
   width: 100%;
   height: 100%;
@@ -56,14 +64,14 @@ const ItemPlace: FC<ItemPlaceProps> = ({ circle, settedGameItem }) => {
     <StyledItemPlace ref={drop} isOver={isOver}>
       <StyledCircle circle={circle.src}>
         {settedGameItem.image && (
-          <Flex align="center" justify="center">
+          <StyledFlex align="center" justify="center">
             <OutlinedText
               text={settedGameItem.correctValue}
               size="56px"
               strokeWidth={5}
             />
             <StyledImage src={settedGameItem.image} alt="" />
-          </Flex>
+          </StyledFlex>
         )}
       </StyledCircle>
     </StyledItemPlace>

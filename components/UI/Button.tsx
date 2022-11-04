@@ -2,6 +2,8 @@ import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { ButtonHTMLAttributes, FC } from "react";
 import spacer, { SpacerProps } from "../../utils/spacer";
+import useSound from "use-sound";
+import { SOUNDS } from "../../constants/game";
 
 export enum ButtonVariants {
   primary = "primary",
@@ -11,6 +13,7 @@ interface ButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement>,
     SpacerProps {
   children: string;
+  onClick: () => void;
   variant?: ButtonVariants;
   disabled?: boolean;
 }
@@ -48,12 +51,26 @@ const StyledButton = styled.button<ButtonProps>`
   ${spacer};
 `;
 
-const Button: FC<ButtonProps> = ({ children, variant, disabled, ...props }) => {
+const Button: FC<ButtonProps> = ({
+  children,
+  onClick,
+  variant,
+  disabled,
+  ...props
+}) => {
+  const [play] = useSound(SOUNDS.clickingSound);
+
+  const clickHandler = () => {
+    play();
+    onClick();
+  };
+
   return (
     <StyledButton
       children={children}
       variant={variant}
       disabled={disabled}
+      onClick={clickHandler}
       {...props}
     />
   );

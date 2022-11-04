@@ -21,6 +21,8 @@ interface IGameContext {
   settedGameItems: ISettedGameItem[];
   setSettedGameItems: (settedGameItems: ISettedGameItem[]) => void;
   addSettedGameItem: (settedGameItem: ISettedGameItem) => void;
+  playBgSound: boolean;
+  setPlayBgSound: (playBgSound: boolean) => void;
 }
 
 const defaultState: IGameContext = {
@@ -38,6 +40,8 @@ const defaultState: IGameContext = {
   settedGameItems: [],
   setSettedGameItems: () => {},
   addSettedGameItem: () => {},
+  playBgSound: false,
+  setPlayBgSound: () => {},
 };
 
 const GameContext = createContext<IGameContext>(defaultState);
@@ -62,6 +66,9 @@ const GameProvider: FC<GameProviderProps> = ({ children }) => {
   );
   const [settedGameItems, setSettedGameItems] = useState<ISettedGameItem[]>(
     defaultState.settedGameItems
+  );
+  const [playBgSound, setPlayBgSound] = useState<boolean>(
+    defaultState.playBgSound
   );
 
   const addSettedGameItem = (settedGameItem: ISettedGameItem) => {
@@ -95,6 +102,8 @@ const GameProvider: FC<GameProviderProps> = ({ children }) => {
     settedGameItems,
     setSettedGameItems,
     addSettedGameItem,
+    playBgSound,
+    setPlayBgSound,
   };
 
   return <GameContext.Provider value={store}>{children}</GameContext.Provider>;

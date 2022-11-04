@@ -5,17 +5,17 @@ import spacer, { SpacerProps } from "../../utils/spacer";
 interface CardProps extends HTMLAttributes<HTMLDivElement>, SpacerProps {
   children: ReactNode;
   borderRadius?: string;
-  borderColor?: string;
   height?: string;
   width?: string;
 }
 
 const StyledCard = styled.div<CardProps>`
-  border: 20px solid ${(props) => props.borderColor || "black"};
+  border: 20px solid transparent;
   border-radius: ${(props) => props.borderRadius || "40px"};
   height: ${(props) => props.height};
   width: ${(props) => props.width};
-  background-color: white;
+  background: linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(to bottom, rgb(127, 117, 240), rgb(16, 31, 50)) border-box;
   ${spacer};
 `;
 

@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
 import { FC, useState } from "react";
 import Flex from "../Flex";
+import useSound from "use-sound";
+import { SOUNDS } from "../../constants/game";
 
 interface RangeProps {
   values: string[];
@@ -42,7 +44,10 @@ const Range: FC<RangeProps> = ({ values, onChange, defaultValue }) => {
     values.indexOf(defaultValue)
   );
 
+  const [play] = useSound(SOUNDS.clickingSound);
+
   const changeHandler = (index: number) => {
+    play();
     setRangeIndex(index);
     const value = values[index];
     onChange(value);

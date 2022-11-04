@@ -3,6 +3,12 @@ import arrowDesc from "../images/arrow-desc.png";
 import { ISortVariant } from "../models/ISortVariant";
 import bgMenu from "../images/backgrounds/bg-menu.jpg";
 import victory from "../images/victory.png";
+import clickingSound from "../sounds/clicking.wav";
+import takeSound from "../sounds/take.wav";
+import correctSound from "../sounds/correct.wav";
+import wrongSound from "../sounds/wrong.wav";
+import victorySound from "../sounds/victory.wav";
+import bgSound from "../sounds/bg.mp3";
 
 const SORT_VARIANTS: ISortVariant[] = [
   {
@@ -26,9 +32,14 @@ const NUMBERS = [
   { min: 51, max: 99 },
   { min: 100, max: 999 },
 ];
-const IMAGES = {
-  bgMenu,
-  victory,
+const IMAGES = { bgMenu, victory };
+const SOUNDS = {
+  clickingSound,
+  takeSound,
+  correctSound,
+  wrongSound,
+  victorySound,
+  bgSound,
 };
 
 export {
@@ -38,4 +49,5 @@ export {
   ALPHABET,
   NUMBERS,
   IMAGES,
+  SOUNDS,
 };

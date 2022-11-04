@@ -1,7 +1,19 @@
 /** @type {import('next').NextConfig} */
+
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-}
+  webpack(config, options) {
+    config.module.rules.push({
+      test: /\.(ogg|mp3|wav|mpe?g)$/i,
+      type: "asset/resource",
+      generator: {
+        filename: "static/chunks/[path][name].[hash][ext]",
+      },
+    });
 
-module.exports = nextConfig
+    return config;
+  },
+};
+
+module.exports = nextConfig;

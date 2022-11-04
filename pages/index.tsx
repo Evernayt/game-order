@@ -34,6 +34,7 @@ const Home = () => {
     setDesign,
     setGameItems,
     setSettedGameItems,
+    setPlayBgSound,
   } = useGameContext();
 
   const sortingChange = (value: string) => {
@@ -42,6 +43,8 @@ const Home = () => {
   };
 
   const startGame = () => {
+    setPlayBgSound(true);
+
     const values = generateValues();
     const index = generateDesign();
     addGameItems(values, DESIGNS[index]);
@@ -101,7 +104,7 @@ const Home = () => {
     <MainContainer>
       <GameContainer bgImage={IMAGES.bgMenu}>
         <Flex align="center" justify="center" height="100%">
-          <Card borderColor="blue" padding="57px 79px 52px 79px">
+          <Card padding="57px 79px 52px 79px">
             <Title text="Кол-во предметов" mb="16px" />
             <Range
               values={ITEM_COUNTS}
