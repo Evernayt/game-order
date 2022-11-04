@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { FC } from "react";
-import Flex from "../../components/Flex";
-import OutlinedText from "../../components/UI/OutlinedText";
+import Flex from "../Flex";
+import OutlinedText from "../UI/OutlinedText";
 import { SpacerProps } from "../../utils/spacer";
 import { useDrag } from "react-dnd";
 import styled from "@emotion/styled";

@@ -1,20 +1,20 @@
-import Flex from "../../components/Flex";
-import MainContainer from "../../components/MainContainer";
-import GameItems from "./GameItems";
-import ItemsPlace from "./ItemsPlace";
+import Flex from "../components/Flex";
+import MainContainer from "../components/MainContainer";
+import GameItems from "../components/Game/GameItems";
+import ItemsPlace from "../components/Game/ItemsPlace";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { TouchBackend } from "react-dnd-touch-backend";
-import GameContainer from "../../components/GameContainer";
-import { useGameContext } from "../../context/gameContext";
+import GameContainer from "../components/GameContainer";
+import { useGameContext } from "../context/gameContext";
 import { useEffect, useState } from "react";
-import SortArrow from "./SortArrow";
-import VictoryModal from "./VictoryModal";
-import useModal from "../../hooks/useModal";
+import SortArrow from "../components/Game/SortArrow";
+import VictoryModal from "../components/Game/VictoryModal";
+import useModal from "../hooks/useModal";
 import useSound from "use-sound";
-import { SOUNDS } from "../../constants/game";
+import { SOUNDS } from "../constants/game";
 import Router from "next/router";
-import isTouchScreen from "../../utils/isTouchScreen";
+import isTouchScreen from "../utils/isTouchScreen";
 
 const Game = () => {
   const [isTouch, setIsTouch] = useState<boolean>(false);
